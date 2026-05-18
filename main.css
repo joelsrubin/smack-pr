@@ -272,8 +272,8 @@ header img {
   .services,
   .get-in-touch,
   .about {
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 30px;
+    padding-right: 30px;
   }
 
   .feature-section img {
