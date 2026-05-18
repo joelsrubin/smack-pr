@@ -29,7 +29,7 @@
   --font-weight-regular: 400;
 
   /* Typography — sizes */
-  --font-size-hero: 250px;
+  --font-size-hero: clamp(5rem, 18vw, 250px);
   --font-size-nav: 36px;
   --font-size-header: 48px;
   --font-size-body: 14px;
@@ -119,7 +119,6 @@ body {
   bottom: 0;
   z-index: 0;
   width: calc(100% + 100px);
-  /* height: auto; */
   transform: translateX(-50%);
   pointer-events: none;
   user-select: none;
@@ -268,8 +267,9 @@ header img {
 }
 
 .about {
-  padding-left: 100px;
-  padding-right: 150px;
+  flex: 0 1 500px;
+  max-width: 500px;
+  padding-inline: clamp(30px, 6vw, 100px);
 }
 
 @media (max-width: 768px) {
