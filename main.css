@@ -63,6 +63,12 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 768px) {
+  :root {
+    --layout-margin: 30px;
+  }
+}
+
 html,
 body {
   margin: 0;
@@ -92,7 +98,7 @@ body {
 
 .hero {
   flex: 1;
-  padding: var(--layout-content-padding-y) 0;
+  padding: var(--layout-content-padding-y);
   display: flex;
   flex-direction: column;
   align-items: center;
