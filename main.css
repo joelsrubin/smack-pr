@@ -244,8 +244,8 @@ header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
+  padding-top: 14px;
+  padding-bottom: 14px;
 }
 
 header p {
