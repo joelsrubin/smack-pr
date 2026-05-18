@@ -152,6 +152,13 @@ footer {
 
 .about-content {
   text-transform: var(--text-transform-body);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  p {
+    margin: 0;
+  }
 }
 
 .services h2 {
@@ -161,6 +168,7 @@ footer {
 
 .services {
   padding-left: 100px;
+  padding-right: 100px;
 }
 
 .services-list {
@@ -216,6 +224,7 @@ h2 {
   font-weight: var(--font-weight-extrabold);
   line-height: 1;
   letter-spacing: var(--letter-spacing-header);
+  margin: 5px 0;
 }
 
 header {
