@@ -51,7 +51,7 @@
 
   /* Layout */
   --grid-columns: 12;
-  --layout-margin: 60px;
+  --layout-margin: 30px;
   --layout-gutter: 20px;
   --layout-container-max: 1440px;
   --layout-content-padding-y: 156px;
@@ -63,11 +63,11 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   :root {
     --layout-margin: 30px;
   }
-}
+} */
 
 html,
 body {
@@ -94,6 +94,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  padding: 10px;
 }
 
 .hero {
@@ -244,8 +245,8 @@ header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 1.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 header p {
