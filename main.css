@@ -118,10 +118,11 @@ body {
   bottom: 0;
   z-index: 0;
   width: calc(100% + 100px);
-  height: auto;
+  /* height: auto; */
   transform: translateX(-50%);
   pointer-events: none;
   user-select: none;
+  object-fit: cover;
 }
 
 footer {
@@ -149,6 +150,7 @@ footer {
   flex-direction: column;
   align-items: start;
   justify-content: center;
+  gap: 1rem;
 }
 
 .about-content {
