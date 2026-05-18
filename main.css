@@ -127,6 +127,7 @@ body {
 footer {
   display: flex;
   justify-content: space-between;
+  padding: var(--layout-margin);
 }
 
 .hero h1 {
