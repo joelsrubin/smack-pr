@@ -29,7 +29,7 @@
   --font-weight-regular: 400;
 
   /* Typography — sizes */
-  --font-size-hero: clamp(5rem, 18vw, 250px);
+  --font-size-hero: clamp(7rem, 18vw, 250px);
   --font-size-nav: 36px;
   --font-size-header: 48px;
   --font-size-body: 14px;
