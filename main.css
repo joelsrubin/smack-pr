@@ -135,9 +135,17 @@ footer {
   justify-content: space-between;
   padding: var(--layout-margin);
   background-color: transparent;
-  position: sticky;
+  position: fixed;
   bottom: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
+  pointer-events: none; /* lets clicks pass through to content underneath */
+}
+
+footer a,
+footer p {
+  pointer-events: auto; /* but the actual text/link is still clickable */
 }
 
 .hero h1 {
@@ -276,8 +284,6 @@ header img {
 }
 
 .about {
-  /* flex: 0 1 500px;
-  max-width: 500px; */
   padding-inline: clamp(30px, 6vw, 100px);
 }
 
