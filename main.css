@@ -75,6 +75,11 @@ body {
   overflow-x: clip;
 }
 
+::selection,
+::-moz-selection {
+  background-color: var(--color-accent-1);
+}
+
 body {
   font-family: var(--font-body);
   font-size: var(--font-size-body);
