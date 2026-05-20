@@ -75,11 +75,6 @@ body {
   overflow-x: clip;
 }
 
-::selection,
-::-moz-selection {
-  background-color: var(--color-accent-1);
-}
-
 body {
   font-family: var(--font-body);
   font-size: var(--font-size-body);
@@ -351,4 +346,12 @@ a {
   border-radius: 12px;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+::selection {
+  background-color: var(--color-accent-1);
+}
+
+::-moz-selection {
+  background-color: var(--color-accent-1);
 }
