@@ -187,9 +187,18 @@
 
               if (dist2 < infl2) {
                 const dist = Math.sqrt(dist2) || 0.0001;
+
                 const falloff = 1 - dist / this.INFLUENCE;
-                const eased = falloff * falloff;
+                const eased = Math.pow(falloff, 2.5);
+
+                // radius swell
                 tr = this.BASE_RADIUS + eased * 5.5 * this.STRENGTH;
+
+                // magnify / bulge effect
+                const push = eased * 12 * this.STRENGTH;
+
+                tx = d.ox + (dx / dist) * push;
+                ty = d.oy + (dy / dist) * push;
               }
             }
 
