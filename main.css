@@ -295,7 +295,7 @@ header img {
 
   canvas {
     width: 535px;
-    padding-right: 100px;
+    margin-right: 100px;
   }
 }
 
