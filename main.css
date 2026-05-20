@@ -255,14 +255,14 @@ header {
   margin: 0;
   background-color: var(--color-background);
   transform: translateZ(0);
-}
-
-header .container {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-top: 14px;
   padding-bottom: 14px;
+  width: 100vw;
+  margin: 0;
+  padding: 14px var(--layout-margin);
 }
 
 header p {
