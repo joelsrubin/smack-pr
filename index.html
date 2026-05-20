@@ -112,7 +112,7 @@
         constructor(canvas, options = {}) {
           this.canvas = canvas;
           this.ctx = canvas.getContext("2d");
-
+          this.interaction = 0;
           // Tunables (overridable per-instance)
           this.SPACING = options.spacing ?? 7;
           this.BASE_RADIUS = options.baseRadius ?? 3.2;
@@ -171,7 +171,8 @@
           const rect = this.canvas.getBoundingClientRect();
           this.ctx.clearRect(0, 0, rect.width, rect.height);
           this.ctx.fillStyle = this.DOT_COLOR;
-
+          const targetInteraction = this.mouse.active ? 1 : 0;
+          this.interaction += (targetInteraction - this.interaction) * 0.08;
           const infl2 = this.INFLUENCE * this.INFLUENCE;
 
           for (let i = 0; i < this.dots.length; i++) {
@@ -180,7 +181,7 @@
               ty = d.oy,
               tr = this.BASE_RADIUS;
 
-            if (this.mouse.active) {
+            if (this.interaction > 0.001) {
               const dx = d.ox - this.mouse.x;
               const dy = d.oy - this.mouse.y;
               const dist2 = dx * dx + dy * dy;
@@ -189,7 +190,7 @@
                 const dist = Math.sqrt(dist2) || 0.0001;
 
                 const falloff = 1 - dist / this.INFLUENCE;
-                const eased = Math.pow(falloff, 2.5);
+                const eased = falloff * falloff * this.interaction;
 
                 // radius swell
                 tr = this.BASE_RADIUS + eased * 5.5 * this.STRENGTH;
@@ -223,8 +224,6 @@
 
         _onLeave() {
           this.mouse.active = false;
-          this.mouse.x = -9999;
-          this.mouse.y = -9999;
         }
 
         _onTouchMove(e) {
