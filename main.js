@@ -241,7 +241,7 @@ class DotGrid {
           // smoother lens falloff
           const eased = Math.pow(falloff, 2.1) * this.interaction;
 
-          glow = eased;
+          glow = 0;
 
           // -----------------------------
           // Bulge Radius
