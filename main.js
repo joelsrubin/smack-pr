@@ -139,19 +139,19 @@ const canvas = document.getElementById("dot-canvas");
 const canvas2 = document.getElementById("dot-canvas-2");
 const canvas3 = document.getElementById("dot-canvas-3");
 
-async function init() {
-  await document.fonts.ready;
+const grids = [
+  new DotGrid(headerCanvas),
+  new DotGrid(canvas),
+  new DotGrid(canvas2),
+  new DotGrid(canvas3),
+];
 
-  const grids = [
-    new DotGrid(headerCanvas),
-    new DotGrid(canvas),
-    new DotGrid(canvas2),
-    new DotGrid(canvas3),
-  ];
+document.fonts.ready.then(() => {
+  requestAnimationFrame(() => {
+    grids.forEach((grid) => grid._resize());
 
-  window.addEventListener("load", () => {
-    grids.forEach((g) => g._resize());
+    setTimeout(() => {
+      grids.forEach((grid) => grid._resize());
+    }, 100);
   });
-}
-
-init();
+});
