@@ -14,11 +14,11 @@ class DotGrid {
 
     this.BASE_RADIUS = options.baseRadius ?? 2.8;
 
-    this.INFLUENCE = options.influence ?? 100;
+    this.INFLUENCE = options.influence ?? 120;
 
-    this.STRENGTH = options.strength ?? 0.45;
+    this.STRENGTH = options.strength ?? 0.5;
 
-    this.EASING = options.easing ?? 0.18;
+    this.EASING = options.easing ?? 0.16;
 
     this.GRADIENT = options.gradient ?? "radial";
 
@@ -177,7 +177,7 @@ class DotGrid {
 
         gradient = Math.max(0, Math.min(1, gradient));
 
-        // dot size tied to gradient
+        // size tied to gradient
         const sizeScale = 0.55 + gradient * 1.35;
 
         this.dots.push({
@@ -238,19 +238,27 @@ class DotGrid {
 
           const falloff = 1 - dist / this.INFLUENCE;
 
-          const eased = Math.pow(falloff, 3) * this.interaction;
+          // smoother lens falloff
+          const eased = Math.pow(falloff, 2.1) * this.interaction;
 
           glow = eased;
 
-          // size bloom
-          tr = d.baseR + eased * 5 * this.STRENGTH;
+          // -----------------------------
+          // Bulge Radius
+          // -----------------------------
 
-          // magnetic pull
-          const push = eased * 5 * this.STRENGTH;
+          tr = d.baseR * (1 + eased * 1.1 * this.STRENGTH);
 
-          tx = d.ox - (dx / dist) * push;
+          // -----------------------------
+          // Bulge Displacement
+          // -----------------------------
 
-          ty = d.oy - (dy / dist) * push;
+          const bulge = eased * 8 * this.STRENGTH;
+
+          // push outward
+          tx = d.ox + (dx / dist) * bulge;
+
+          ty = d.oy + (dy / dist) * bulge;
         }
       }
 
@@ -360,20 +368,20 @@ const canvas3 = document.getElementById("dot-canvas-3");
 // ------------------------------------
 
 const grids = [
-  // HERO — no gradient
+  // HERO
   new DotGrid(headerCanvas, {
     spacing: 8,
     baseRadius: 2.4,
 
-    influence: 140,
-    strength: 0.65,
+    influence: 150,
+    strength: 0.8,
 
     gradient: "flat",
 
     brightness: 1,
     noise: 0,
 
-    hoverBrightness: 14,
+    hoverBrightness: 16,
   }),
 
   // ABOUT
@@ -381,8 +389,8 @@ const grids = [
     spacing: 7,
     baseRadius: 2.8,
 
-    influence: 110,
-    strength: 0.45,
+    influence: 120,
+    strength: 0.55,
 
     gradient: "linear",
 
@@ -396,14 +404,14 @@ const grids = [
     baseRadius: 2.6,
 
     influence: 140,
-    strength: 0.65,
+    strength: 0.7,
 
     gradient: "flat",
 
     brightness: 1,
     noise: 0,
 
-    hoverBrightness: 14,
+    hoverBrightness: 15,
   }),
 
   // CONTACT
@@ -411,8 +419,8 @@ const grids = [
     spacing: 7,
     baseRadius: 2.8,
 
-    influence: 110,
-    strength: 0.45,
+    influence: 120,
+    strength: 0.55,
 
     gradient: "linear",
 
