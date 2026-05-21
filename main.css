@@ -295,6 +295,14 @@ header img {
 .about {
   padding-inline: clamp(30px, 6vw, 100px);
 }
+
+canvas:not(#dot-canvas-header) {
+  display: block;
+  width: 400px;
+  height: 500px;
+  cursor: crosshair;
+}
+
 .get-in-touch-content {
   flex: 1;
   display: flex;
@@ -303,16 +311,15 @@ header img {
   justify-content: end;
 
   canvas {
-    width: 535px;
-    margin-right: 100px;
+    width: 400px;
+    height: 600px;
+    margin-right: 200px;
   }
 }
 
-canvas:not(#dot-canvas-header) {
-  display: block;
-  width: 400px;
-  height: 500px;
-  cursor: crosshair;
+canvas#dot-canvas-3 {
+  width: 600px;
+  height: 400px;
 }
 
 @media (max-width: 768px) {
