@@ -136,6 +136,7 @@ body {
   height: 30%;
   user-select: none;
   object-fit: cover;
+  cursor: crosshair;
 }
 
 footer {
