@@ -105,7 +105,7 @@ class DotGrid {
 
     // Linear
     if (this.GRADIENT === "linear") {
-      return nx;
+      return 0.2 + nx * 0.6;
     }
 
     // Vertical
@@ -178,7 +178,7 @@ class DotGrid {
         gradient = Math.max(0, Math.min(1, gradient));
 
         // size tied to gradient
-        const sizeScale = 0.55 + gradient * 1.35;
+        const sizeScale = 0.8 + gradient * 0.7;
 
         this.dots.push({
           ox: x,
