@@ -392,16 +392,18 @@ const grids = [
 
   // SERVICES
   new DotGrid(canvas2, {
-    spacing: 7,
-    baseRadius: 2.8,
+    spacing: 8,
+    baseRadius: 2.6,
 
-    influence: 110,
-    strength: 0.45,
+    influence: 140,
+    strength: 0.65,
 
     gradient: "flat",
 
     brightness: 1,
-    noise: 0.03,
+    noise: 0,
+
+    hoverBrightness: 14,
   }),
 
   // CONTACT
