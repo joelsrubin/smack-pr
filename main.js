@@ -392,7 +392,7 @@ const grids = [
     influence: 120,
     strength: 0.55,
 
-    gradient: "linear",
+    gradient: "radial",
 
     brightness: 1,
     noise: 0.03,
