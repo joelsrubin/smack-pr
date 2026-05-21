@@ -448,3 +448,7 @@ document.fonts.ready.then(() => {
     }, 100);
   });
 });
+
+const year = new Date().getFullYear();
+document.getElementById("footer-text").textContent =
+  `© ${year} smack pr & consulting`;
