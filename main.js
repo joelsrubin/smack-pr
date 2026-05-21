@@ -59,6 +59,7 @@ class DotGrid {
 
   _draw() {
     const rect = this.canvas.getBoundingClientRect();
+
     this.ctx.clearRect(0, 0, rect.width, rect.height);
     this.ctx.fillStyle = this.DOT_COLOR;
     const targetInteraction = this.mouse.active ? 1 : 0;

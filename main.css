@@ -133,7 +133,7 @@ body {
   z-index: 0;
   width: calc(100% + 100px);
   transform: translateX(-50%);
-  height: 40%;
+  height: 30%;
   user-select: none;
   object-fit: cover;
 }
