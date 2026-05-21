@@ -313,7 +313,6 @@ canvas:not(#dot-canvas-header) {
   width: 400px;
   height: 500px;
   cursor: crosshair;
-  padding: 10px;
 }
 
 @media (max-width: 768px) {
