@@ -281,6 +281,22 @@ header {
 }
 
 header button {
+  appearance: none;
+  -webkit-appearance: none;
+
+  border: none;
+  background: none;
+
+  padding: 0;
+  margin: 0;
+
+  font: inherit;
+  color: inherit;
+
+  border-radius: 0;
+
+  outline: none;
+  box-shadow: none;
   margin: 0;
   font-family: var(--font-nav);
   font-size: var(--font-size-nav);
