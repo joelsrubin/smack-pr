@@ -449,6 +449,19 @@ document.fonts.ready.then(() => {
   });
 });
 
+// ------- text ---------- //
+
 const year = new Date().getFullYear();
 document.getElementById("footer-text").textContent =
   `© ${year} smack pr & consulting`;
+
+// ----------------------- //
+
+function scrollToTop() {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth",
+  });
+}
+
+document.getElementById("header-button").onclick = scrollToTop;

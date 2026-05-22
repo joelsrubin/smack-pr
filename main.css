@@ -280,12 +280,15 @@ header {
   padding: 14px var(--layout-margin);
 }
 
-header p {
+header button {
   margin: 0;
   font-family: var(--font-nav);
   font-size: var(--font-size-nav);
   font-weight: var(--font-weight-black);
   line-height: 1;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
 }
 
 header img {
