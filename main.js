@@ -28,6 +28,10 @@ class DotGrid {
 
     this.HOVER_BRIGHTNESS = options.hoverBrightness ?? 12;
 
+    // selectively remove auto-padding sides
+    // e.g. ["right", "bottom"]
+    this.UNPAD = options.unpad ?? [];
+
     this.DPR = Math.max(1, window.devicePixelRatio || 1);
 
     this.dots = [];
@@ -43,9 +47,11 @@ class DotGrid {
     // -----------------------------
 
     this._resize = this._resize.bind(this);
+
     this._draw = this._draw.bind(this);
 
     this._onMove = this._onMove.bind(this);
+
     this._onLeave = this._onLeave.bind(this);
 
     this._onTouchMove = this._onTouchMove.bind(this);
@@ -98,22 +104,18 @@ class DotGrid {
   // -----------------------------
 
   _getGradient(nx, ny) {
-    // Flat
     if (this.GRADIENT === "flat") {
       return 0.5;
     }
 
-    // Linear
     if (this.GRADIENT === "linear") {
       return 0.2 + nx * 0.6;
     }
 
-    // Vertical
     if (this.GRADIENT === "vertical") {
       return ny;
     }
 
-    // Radial
     if (this.GRADIENT === "radial") {
       const cx = 0.72;
       const cy = 0.48;
@@ -126,7 +128,6 @@ class DotGrid {
       return 1 - Math.min(dist * 1.7, 1);
     }
 
-    // Blob
     if (this.GRADIENT === "blob") {
       const blob1 =
         1 - Math.min(Math.sqrt((nx - 0.25) ** 2 + (ny - 0.45) ** 2) * 2, 1);
@@ -137,7 +138,6 @@ class DotGrid {
       return blob1 * 0.5 + blob2;
     }
 
-    // Organic
     if (this.GRADIENT === "organic") {
       return nx * 0.5 + Math.sin(nx * 6) * 0.08 + Math.cos(ny * 8) * 0.08;
     }
@@ -152,22 +152,32 @@ class DotGrid {
   _buildDots(w, h) {
     this.dots = [];
 
-    // enough room for hover expansion
+    // auto safe-space for hover expansion
     const padding =
-      this.BASE_RADIUS + this.INFLUENCE * 0.02 + this.STRENGTH * 0.5;
+      this.BASE_RADIUS + this.INFLUENCE * 0.02 + this.STRENGTH * 8;
 
-    // usable drawing area
-    const innerW = w - padding * 2;
-    const innerH = h - padding * 2;
+    // selectively remove padding
+    const padTop = this.UNPAD.includes("top") ? 0 : padding;
+
+    const padRight = this.UNPAD.includes("right") ? 0 : padding;
+
+    const padBottom = this.UNPAD.includes("bottom") ? 0 : padding;
+
+    const padLeft = this.UNPAD.includes("left") ? 0 : padding;
+
+    // usable area
+    const innerW = w - padLeft - padRight;
+
+    const innerH = h - padTop - padBottom;
 
     const cols = Math.floor(innerW / this.SPACING);
 
     const rows = Math.floor(innerH / this.SPACING);
 
-    // center INSIDE padded area
-    const offsetX = padding + (innerW - (cols - 1) * this.SPACING) / 2;
+    // centered within padded area
+    const offsetX = padLeft + (innerW - (cols - 1) * this.SPACING) / 2;
 
-    const offsetY = padding + (innerH - (rows - 1) * this.SPACING) / 2;
+    const offsetY = padTop + (innerH - (rows - 1) * this.SPACING) / 2;
 
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
@@ -176,6 +186,7 @@ class DotGrid {
         const y = offsetY + r * this.SPACING;
 
         const nx = x / w;
+
         const ny = y / h;
 
         let gradient = this._getGradient(nx, ny);
@@ -225,6 +236,7 @@ class DotGrid {
       const d = this.dots[i];
 
       let tx = d.ox;
+
       let ty = d.oy;
 
       let tr = d.baseR;
@@ -247,24 +259,14 @@ class DotGrid {
 
           const falloff = 1 - dist / this.INFLUENCE;
 
-          // smoother lens falloff
           const eased = Math.pow(falloff, 2.1) * this.interaction;
 
-          glow = 0;
-
-          // -----------------------------
-          // Bulge Radius
-          // -----------------------------
-
+          // radius expansion
           tr = d.baseR * (1 + eased * 1.1 * this.STRENGTH);
 
-          // -----------------------------
-          // Bulge Displacement
-          // -----------------------------
-
+          // displacement
           const bulge = eased * 8 * this.STRENGTH;
 
-          // push outward
           tx = d.ox + (dx / dist) * bulge;
 
           ty = d.oy + (dy / dist) * bulge;
@@ -282,8 +284,7 @@ class DotGrid {
       d.r += (tr - d.r) * this.EASING;
 
       // -----------------------------
-      // Brand Color System
-      // base: #B5D4F4
+      // Colors
       // -----------------------------
 
       const hue = 210 - d.gradient * 4 + glow * 3;
@@ -294,12 +295,12 @@ class DotGrid {
         (72 + d.gradient * 10 + glow * this.HOVER_BRIGHTNESS) * this.BRIGHTNESS;
 
       this.ctx.fillStyle = `
-          hsl(
-            ${hue},
-            ${saturation}%,
-            ${lightness}%
-          )
-        `;
+        hsl(
+          ${hue},
+          ${saturation}%,
+          ${lightness}%
+        )
+      `;
 
       // -----------------------------
       // Draw Dot
@@ -405,6 +406,7 @@ const grids = [
 
     brightness: 1,
     noise: 0.03,
+    unpad: ["right"],
   }),
 
   // SERVICES
@@ -421,6 +423,7 @@ const grids = [
     noise: 0,
 
     hoverBrightness: 15,
+    unpad: ["left"],
   }),
 
   // CONTACT
@@ -435,6 +438,7 @@ const grids = [
 
     brightness: 1,
     noise: 0.03,
+    unpad: ["bottom"],
   }),
 ];
 
@@ -446,6 +450,7 @@ document.fonts.ready.then(() => {
   requestAnimationFrame(() => {
     grids.forEach((grid) => {
       grid._resize();
+
       grid.ready = true;
     });
 
@@ -461,6 +466,7 @@ document.fonts.ready.then(() => {
 // ------- text ---------- //
 
 const year = new Date().getFullYear();
+
 document.getElementById("footer-text").textContent =
   `© ${year} smack pr & consulting`;
 
