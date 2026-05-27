@@ -385,6 +385,11 @@ canvas#dot-canvas-3 {
   .get-in-touch {
     padding-bottom: 150px;
   }
+
+  .hero__graphic {
+    height: 40%;
+    transform: translate(-50%, 10%);
+  }
 }
 
 a {
