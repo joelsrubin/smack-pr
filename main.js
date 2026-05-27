@@ -152,13 +152,22 @@ class DotGrid {
   _buildDots(w, h) {
     this.dots = [];
 
-    const cols = Math.floor(w / this.SPACING);
+    // enough room for hover expansion
+    const padding =
+      this.BASE_RADIUS + this.INFLUENCE * 0.02 + this.STRENGTH * 0.5;
 
-    const rows = Math.floor(h / this.SPACING);
+    // usable drawing area
+    const innerW = w - padding * 2;
+    const innerH = h - padding * 2;
 
-    const offsetX = (w - (cols - 1) * this.SPACING) / 2;
+    const cols = Math.floor(innerW / this.SPACING);
 
-    const offsetY = (h - (rows - 1) * this.SPACING) / 2;
+    const rows = Math.floor(innerH / this.SPACING);
+
+    // center INSIDE padded area
+    const offsetX = padding + (innerW - (cols - 1) * this.SPACING) / 2;
+
+    const offsetY = padding + (innerH - (rows - 1) * this.SPACING) / 2;
 
     for (let r = 0; r < rows; r++) {
       for (let c = 0; c < cols; c++) {
